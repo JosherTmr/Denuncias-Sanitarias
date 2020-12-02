@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Denuncias Sanitarias</title>
+
+    <meta charset="utf-8">
+
+    <!-- Ensures that IE and Edge uses the latest version and doesn't emulate an older version -->
+    <meta http-equiv="x-ua-compatible" content="IE=Edge">
+
+    <!-- Ensures the web page looks good on all screen sizes. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Add references to the Azure Maps Map control JavaScript and CSS files. -->
+    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" type="text/css">
+    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
+
+
+    <script type="text/javascript" href="style">
+        var map, marker;
+        var newMarker = 100;     
+      
+        function InitMap()
+        {
+            map = new atlas.Map('myMap', {
+            center: [-75.5144400, 10.3997200],
+            zoom: 12,
+            language: 'es',
+            authOptions: {
+                authType: 'subscriptionKey',
+                subscriptionKey: 'HfUwbE5sL-5hEQBCXDQWZ1ZIvdGUhAtGMYmzJjvcxSM' 
+            }
+        });
+
+            map.events.add('ready', function () {
+                map.events.add('click', function (e) {
+                    //atlas.animations.setCoordinates(marker, e.position, { duration: 2000, easing: 'easeInElastic', autoPlay: true });
+                    newMarker = e.position
+                    nuevoMarker = new atlas.HtmlMarker({
+                        position: newMarker                        
+                    });                                              
+                    map.markers.add(nuevoMarker);                   
+                                                                                  
+                });
+            });
+             
+         }
+        
+    </script>
+
+    <style>
+        html, body {
+            margin: 0;
+        }
+        .denuncia {
+            background: rgba(7, 143, 233, 0.75); border-color:rgb(0, 0, 0);
+            width: 25%;
+            color: white;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 18px;
+            text-align: center;
+            padding: 20px;
+            min-height: 600px;
+            border-radius: 22px;
+            border-color: rgb(3, 0, 248);
+            position: absolute;
+            left: 75%;
+            top: 0%;
+            display: block;
+        }
+
+        #myMap {
+            height: 100vh;
+            width: 100vw;
+        }
+    </style>
+</head>
+<body onload="InitMap()">
+    <div id="myMap" style="position:relative;width:75%;min-width:300px;height:600px;"></div>
+    <div class="denuncia">
+        Rellene el formulario de denuncia.
+        <form action="">
+            <p>Documento de identidad:</p>
+            <input type="password" class="field"> <br />
+            <p>Detalles</p>
+            <textarea class="field"></textarea> <br />
+            <p class="center-content">
+                <input type="submit" class="btn btn-green" value="Enviar Datos">
+            </p>
+
+        </form>
+    </div>
+    <div style="position:absolute;top:0px;left:calc(30% - 100px);background-color:rgba(255, 255, 255, 0.25);padding:10px;">Seleccione la ubicación de la denuncia</div>
+</body>
+</html>
